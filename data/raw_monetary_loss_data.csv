@@ -1,0 +1,4 @@
+asset_class,supply_pool_usd,annual_losses_usd,loss_type,source_reference
+Physical Bank Vault Cash,8500000000000,137500000,Vault Robberies & Armored Heists,FBI BCS (2023)
+Physical Cash Aggregate,8500000000000,6000000000,Aggregate Larceny / Burglary / Robbery,FBI UCR (2020) / NCVS
+Active Tokenized Digital Dollars,300000000000,2720000000,Smart Contract Exploits & Wallet Drainers,Chainalysis (2025) / Scam Sniffer (2025)
