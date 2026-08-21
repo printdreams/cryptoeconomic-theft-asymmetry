@@ -1,0 +1,4 @@
+asset_class,supply_pool_usd,annual_losses_usd,loss_type,source_reference,annual_loss_rate,annual_loss_rate_pct,rvr_vs_vault,rvr_vs_cash_agg
+Physical Bank Vault Cash,8500000000000,137500000,Vault Robberies & Armored Heists,FBI BCS (2023),0.000016176470588235296,0.0016176470588235296,1.0,0.022916666666666668
+Physical Cash Aggregate,8500000000000,6000000000,Aggregate Larceny / Burglary / Robbery,FBI UCR (2020) / NCVS,0.0007058823529411765,0.07058823529411765,43.63636363636363,1.0
+Active Tokenized Digital Dollars,300000000000,2720000000,Smart Contract Exploits & Wallet Drainers,Chainalysis (2025) / Scam Sniffer (2025),0.009066666666666667,0.9066666666666667,560.4848484848485,12.844444444444445
