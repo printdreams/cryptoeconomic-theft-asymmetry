@@ -18,4 +18,11 @@ pip install -r requirements.txt<br>
 python scripts/reproduce_models.py<br>
 
 # 5. Launch Jupyter Lab for interactive peer review<br>
-jupyter lab notebooks/reproduce_report_figures.ipynb<br>
+jupyter lab notebooks/reproduce_report_figures.ipynb<br><br><br>
+
+# License
+This project uses a dual-license model to distinguish between open-source code and open-access research data:
+
+Source Code & Software: Distributed under the MIT License. Free for reuse, modification, and integration. See LICENSE-MIT.
+
+Data, Reports & Visualizations: Distributed under Creative Commons Attribution 4.0 International (CC BY 4.0). Free to share and adapt with appropriate attribution. See LICENSE-CC-BY-4.0.
