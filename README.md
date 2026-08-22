@@ -16,6 +16,7 @@ pip install -r requirements.txt<br>
 
 # 4. Execute automated calculation script to generate outputs<br>
 python scripts/reproduce_models.py<br>
+python scripts/shamir_gf256.py<br>
 
 # 5. Launch Jupyter Lab for interactive peer review<br>
 jupyter lab notebooks/reproduce_report_figures.ipynb<br><br><br>
