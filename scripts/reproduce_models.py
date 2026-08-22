@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+# Copyright (a) 2026 Alex Breton
 #!/usr/bin/env python3
 """
 Reproducibility Script for Cryptoeconomic Theft Asymmetry Research Report.
