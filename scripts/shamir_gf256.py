@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # SPDX-License-Identifier: MIT
-# Copyright (c) 2026 Alex Breton
+# Copyright (a) 2026 Alex Breton
 
 """
 Shamir's 2-of-2 Threshold Secret Sharing Implementation over GF(2^256).
@@ -11,10 +11,10 @@ evaluation and Lagrange interpolation (Shamir, 1979).
 """
 
 import os
-import sys
 
-# Irreducible polynomial for GF(2^256): x^256 + x^10 + x^5 + x^2 + 1
-POLYNOMIAL = 0x10000000000000000000000000000000000000000000000000000000000000101
+# Irreducible primitive polynomial for GF(2^256): x^256 + x^10 + x^5 + x^2 + 1
+# 2^10 + 2^5 + 2^2 + 2^0 = 1061 = 0x425
+POLYNOMIAL = (1 << 256) | 0x425
 
 
 def gf_add(a: int, b: int) -> int:
@@ -56,11 +56,7 @@ def gf_inv(a: int) -> int:
 def split_secret_2_of_2(
     master_key_bytes: bytes,
 ) -> tuple[tuple[int, int], tuple[int, int]]:
-    """Splits a 256-bit master key K into two shares over GF(2^256) (Shamir, 1979).
-
-    :param master_key_bytes: 32-byte secret key
-    :return: Tuple of two shares ((x1, y1), (x2, y2))
-    """
+    """Splits a 256-bit master key K into two shares over GF(2^256) (Shamir, 1979)."""
     if len(master_key_bytes) != 32:
         raise ValueError("Master key must be exactly 32 bytes (256 bits).")
 
@@ -79,12 +75,7 @@ def split_secret_2_of_2(
 def reconstruct_secret_2_of_2(
     share1: tuple[int, int], share2: tuple[int, int]
 ) -> bytes:
-    """Reconstructs master key K via Lagrange interpolation at x=0 over GF(2^256).
-
-    :param share1: Tuple (x1, y1)
-    :param share2: Tuple (x2, y2)
-    :return: 32-byte reconstructed master key
-    """
+    """Reconstructs master key K via Lagrange interpolation at x=0 over GF(2^256)."""
     x1, y1 = share1
     x2, y2 = share2
 
