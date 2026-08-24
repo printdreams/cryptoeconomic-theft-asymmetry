@@ -38,7 +38,9 @@ python scripts/reproduce_models.py
 python scripts/shamir_gf256.py
 
 ### 6. Launch Interactive Jupyter Notebook
-jupyter lab notebooks/reproduce_report_figures.ipynb
+jupyter lab notebooks/reproduce_report_figures.ipynb<br><br>
+Alternatively you can run it directly using Jupyter's nbviewer:<br>
+https://nbviewer.org/github/printdreams/cryptoeconomic-theft-asymmetry/blob/main/notebooks/reproduce_report_figures.ipynb
 <br><br><br>
 ## Option B: Windows (PowerShell)
 On Windows PowerShell, execution policies or shell environment aliases can occasionally restrict script activation. Follow these tested instructions:
@@ -63,7 +65,9 @@ python scripts/reproduce_models.py
 python scripts/shamir_gf256.py
 
 ### 6. Launch Jupyter Lab
-jupyter lab notebooks/reproduce_report_figures.ipynb
+jupyter lab notebooks/reproduce_report_figures.ipynb<br><br>
+Alternatively you can run it directly using Jupyter's nbviewer:<br> 
+https://nbviewer.org/github/printdreams/cryptoeconomic-theft-asymmetry/blob/main/notebooks/reproduce_report_figures.ipynb
 <br><br>
 ## Note for Windows Users (Direct Execution Fallback): 
 If PowerShell prevents environment activation, you can execute all commands directly via the virtual environment's binary without modifying system execution policies:
