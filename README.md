@@ -3,7 +3,7 @@ Allows automated validation, and computational reproducibility of all econometri
 
 # <b>Reproducibility Commands (Linux / macOS / Windows)</b><br><br>
 # 1. Clone the repository<br>
-git clone https://github.com/your-username/cryptoeconomic-theft-asymmetry.git<br>
+git clone https://github.com/printdreams/cryptoeconomic-theft-asymmetry.git<br>
 cd cryptoeconomic-theft-asymmetry<br>
 
 # 2. Set up Python 3.10 virtual environment<br>
