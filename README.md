@@ -46,7 +46,7 @@ unsupported enforcement quantities.
 
 ## Quick start
 
-Python 3.10 or later is required.
+Python 3.10 or later is required although in our tests we noticed that Python 3.14 currently segfaults with the pinned numpy/pandas. Python 3.10 and 3.12 worked fine during our testing.
 
 ```bash
 git clone https://github.com/printdreams/cryptoeconomic-theft-asymmetry.git
