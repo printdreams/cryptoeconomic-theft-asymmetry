@@ -12,6 +12,8 @@ from datetime import datetime
 from math import log
 from typing import Iterable
 
+import math
+
 import numpy as np
 import pandas as pd
 
@@ -254,7 +256,7 @@ def partition_objective(wealth: float, n: int, p: float, q: float,
                         fixed_cost: float, cost_per_partition: float) -> dict:
     """Equation 21 for a specified feasible N."""
     losses, probabilities = loss_distribution(wealth, n, p, q)
-    expected = float(np.dot(losses, probabilities))
+    expected = math.fsum(float(l) * float(q) for l, q in zip(losses, probabilities))
     cvar = discrete_cvar(losses, probabilities, alpha)
     cost = fixed_cost + cost_per_partition * n
     return {"expected_loss": expected, "cvar": cvar, "cost": cost,
