@@ -1,0 +1,7 @@
+domain,period,timestamp,exposed_value,classification,exposure_concept,source_id
+us_reported_currency,2019,2019-01-01T00:00:00Z,1759800000000,empirical_calibration,year-end stock held constant for transparent calibration,federal_reserve_currency_2019
+us_reported_currency,2019,2020-01-01T00:00:00Z,1759800000000,empirical_calibration,year-end stock held constant for transparent calibration,federal_reserve_currency_2019
+synthetic_custody,illustrative,2025-01-01T00:00:00Z,100000000,illustrative_scenario,time-weighted reachable balance,synthetic
+synthetic_custody,illustrative,2025-07-01T00:00:00Z,120000000,illustrative_scenario,time-weighted reachable balance,synthetic
+synthetic_custody,illustrative,2026-01-01T00:00:00Z,140000000,illustrative_scenario,time-weighted reachable balance,synthetic
+

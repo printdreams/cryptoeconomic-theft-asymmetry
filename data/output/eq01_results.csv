@@ -1,0 +1,3 @@
+equation,scenario_id,classification,utility_family,expected_utility
+1,illustrative_linear,illustrative_scenario,linear,104070.0
+1,illustrative_crra,illustrative_scenario,crra,-9.79198809335594e-06

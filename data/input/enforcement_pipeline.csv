@@ -1,0 +1,8 @@
+cohort_id,classification,stage_order,stage,event_count,cohort_start,observation_end,unit,jurisdiction
+synthetic_mature_cohort,illustrative_scenario,0,eligible_events,1000,2018-01-01,2025-12-31,event,illustrative
+synthetic_mature_cohort,illustrative_scenario,1,reported,720,2018-01-01,2025-12-31,event,illustrative
+synthetic_mature_cohort,illustrative_scenario,2,attributed,180,2018-01-01,2025-12-31,event,illustrative
+synthetic_mature_cohort,illustrative_scenario,3,arrested,72,2018-01-01,2025-12-31,event,illustrative
+synthetic_mature_cohort,illustrative_scenario,4,prosecuted,50,2018-01-01,2025-12-31,event,illustrative
+synthetic_mature_cohort,illustrative_scenario,5,convicted,40,2018-01-01,2025-12-31,event,illustrative
+

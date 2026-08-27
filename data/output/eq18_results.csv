@@ -1,0 +1,8 @@
+equation,scenario_id,classification,n,unit_value,expected_loss
+18,independent,illustrative_scenario,1,1000000.0,10000.0
+18,independent,illustrative_scenario,2,500000.0,10000.0
+18,independent,illustrative_scenario,5,200000.0,10000.0
+18,independent,illustrative_scenario,10,100000.0,10000.0
+18,correlated,illustrative_scenario,2,500000.0,10000.0
+18,correlated,illustrative_scenario,5,200000.0,10000.0
+18,correlated,illustrative_scenario,10,100000.0,10000.0

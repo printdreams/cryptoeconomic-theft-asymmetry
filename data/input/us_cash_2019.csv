@@ -1,0 +1,3 @@
+year,gross_stolen_usd,recovered_usd,currency_stock_usd,agencies,population_covered,numerator_source,denominator_source,classification,denominator_caveat
+2019,1423559757,36980933,1759800000000,14165,285731352,FBI Crime in the United States 2019 Table 24,Federal Reserve Currency in Circulation 2019,empirical_calibration,Year-end stock includes currency abroad and is not average theft-exposed value
+

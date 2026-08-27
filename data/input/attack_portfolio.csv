@@ -1,0 +1,5 @@
+scenario_id,classification,target_id,fixed_development_cost,q,p,gain,marginal_cost,penalty,recovery
+reusable_exploit,illustrative_scenario,target_1,50000,0.30,0.05,40000,1500,60000,10000
+reusable_exploit,illustrative_scenario,target_2,50000,0.25,0.05,35000,1000,60000,10000
+reusable_exploit,illustrative_scenario,target_3,50000,0.20,0.05,30000,800,60000,10000
+

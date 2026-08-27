@@ -1,0 +1,6 @@
+equation,cohort_id,classification,from_stage,to_stage,n_previous,n_current,transition_rate
+4,synthetic_mature_cohort,illustrative_scenario,eligible_events,reported,1000,720,0.72
+4,synthetic_mature_cohort,illustrative_scenario,reported,attributed,720,180,0.25
+4,synthetic_mature_cohort,illustrative_scenario,attributed,arrested,180,72,0.4
+4,synthetic_mature_cohort,illustrative_scenario,arrested,prosecuted,72,50,0.6944444444444444
+4,synthetic_mature_cohort,illustrative_scenario,prosecuted,convicted,50,40,0.8

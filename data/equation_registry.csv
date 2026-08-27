@@ -1,0 +1,23 @@
+equation,manuscript_section,short_name,latex,script,input_csv,output_csv,evidence_class
+1,2.2,Expected utility,"EU_j=q_j[(1-p_j)U(Y+G_j-c_j)+p_jU(Y+G_j-c_j-F_j-R_j)]+(1-q_j)U(Y-c_j)",scripts/eq01_expected_utility.py,data/input/offender_scenarios.csv,data/output/eq01_results.csv,illustrative
+2,2.2,Risk-neutral payoff,"\pi_j=q_jG_j-c_j-q_jp_j(F_j+R_j)",scripts/eq02_risk_neutral_payoff.py,data/input/offender_scenarios.csv,data/output/eq02_results.csv,illustrative
+3,2.2,Automated attack portfolio,"\Pi(M)=-C_0+\sum_{m=1}^M[q_mG_m-c_m-q_mp_m(F_m+R_m)]",scripts/eq03_automated_attack_portfolio.py,data/input/attack_portfolio.csv,data/output/eq03_results.csv,illustrative
+4,2.3,Enforcement transition,"\widehat{\theta}_k=n_k/n_{k-1}",scripts/eq04_enforcement_transition_rates.py,data/input/enforcement_pipeline.csv,data/output/eq04_results.csv,illustrative
+5,2.3,Cohort final-stage probability,"\widehat{p}_{0\to K}=\prod_k\widehat{\theta}_k=n_K/n_0",scripts/eq05_enforcement_cohort_probability.py,data/input/enforcement_pipeline.csv,data/output/eq05_results.csv,illustrative
+6,2.3,Probability-only deterrence ratio,"DR^{(p)}_{c,d}=p_c/p_d",scripts/eq06_probability_deterrence_ratio.py,data/input/deterrence_scenarios.csv,data/output/eq06_results.csv,conditional
+7,3.2,Gross and net loss totals,"G_{j,t}=\sum_e g_e; N_{j,t}(h)=\sum_e[g_e-r_e(h)]",scripts/eq07_gross_net_loss_totals.py,data/input/theft_events.csv,data/output/eq07_results.csv,mixed
+8,3.2,Time-weighted exposure,"E_{j,t}=T^{-1}\int_t^{t+T}V_j(u)du",scripts/eq08_time_weighted_exposure.py,data/input/exposure_observations.csv,data/output/eq08_results.csv,mixed
+9,3.2,Loss intensities,"\widehat{L}^G=G/E; \widehat{L}^N=N/E",scripts/eq09_loss_intensities.py,data/input/theft_events.csv;data/input/exposure_observations.csv,data/output/eq09_results.csv,mixed
+10,3.2,Relative Vulnerability Ratio,"RVR_{a,b}=\widehat{L}^G_a/\widehat{L}^G_b",scripts/eq10_relative_vulnerability_ratio.py,data/input/rvr_scenarios.csv,data/output/eq10_results.csv,conditional
+11,4.1,U.S. cash gross intensity,"1423559757/1759800000000",scripts/eq11_cash_gross_intensity.py,data/input/us_cash_2019.csv,data/output/eq11_results.csv,empirical_calibration
+12,4.1,U.S. cash recovery share,"36980933/1423559757",scripts/eq12_cash_recovery_share.py,data/input/us_cash_2019.csv,data/output/eq12_results.csv,empirical_calibration
+13,4.1,U.S. cash net intensity,"(1423559757-36980933)/1759800000000",scripts/eq13_cash_net_intensity.py,data/input/us_cash_2019.csv,data/output/eq13_results.csv,empirical_calibration
+14,5.3,XOR share generation,"S_1\leftarrow\$\{0,1\}^{256}; S_2=K\oplus S_1",scripts/eq14_xor_share_generation.py,data/input/xor_test_vectors.csv,data/output/eq14_results.csv,test_vector
+15,5.3,XOR reconstruction,"K=S_1\oplus S_2",scripts/eq15_xor_reconstruction.py,data/input/xor_test_vectors.csv,data/output/eq15_results.csv,test_vector
+16,5.4,Shamir polynomial,"f(x)=K+\sum_{j=1}^{t-1}a_jx^j",scripts/eq16_shamir_polynomial.py,data/input/shamir_prime521_test_vectors.csv,data/output/eq16_results.csv,test_vector
+17,5.4,Lagrange reconstruction,"K=f(0)=\sum_i y_i\prod_{\ell\ne i}x_\ell/(x_\ell-x_i)",scripts/eq17_shamir_lagrange_reconstruction.py,data/input/shamir_prime521_test_vectors.csv,data/output/eq17_results.csv,test_vector
+18,6,Partition expected loss,"L=(W/N)\sum_iX_i; \mathbb{E}[L]=pW",scripts/eq18_partition_expected_loss.py,data/input/partition_scenarios.csv,data/output/eq18_results.csv,illustrative
+19,6,Equicorrelated loss variance,"\mathrm{Var}(L)=W^2p(1-p)[1/N+\rho(N-1)/N]",scripts/eq19_equicorrelated_loss_variance.py,data/input/partition_scenarios.csv,data/output/eq19_results.csv,illustrative
+20,6,Common-mode catastrophic loss,"\Pr(L=W)=q+(1-q)p^N",scripts/eq20_common_mode_catastrophic_loss.py,data/input/partition_scenarios.csv,data/output/eq20_results.csv,illustrative
+21,6,Partition objective,"\min_N\mathbb{E}[L_N]+\lambda\mathrm{CVaR}_\alpha(L_N)+C(N)",scripts/eq21_partition_cvar_optimization.py,data/input/optimization_scenarios.csv,data/output/eq21_results.csv,illustrative
+

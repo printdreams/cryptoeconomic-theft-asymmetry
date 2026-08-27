@@ -1,0 +1,8 @@
+scenario_id,classification,wealth,n,p,q,risk_weight,alpha,fixed_cost,cost_per_partition
+institutional_sensitivity,illustrative_scenario,1000000,1,0.01,0.002,0.50,0.99,500,250
+institutional_sensitivity,illustrative_scenario,1000000,2,0.01,0.002,0.50,0.99,500,250
+institutional_sensitivity,illustrative_scenario,1000000,3,0.01,0.002,0.50,0.99,500,250
+institutional_sensitivity,illustrative_scenario,1000000,5,0.01,0.002,0.50,0.99,500,250
+institutional_sensitivity,illustrative_scenario,1000000,10,0.01,0.002,0.50,0.99,500,250
+institutional_sensitivity,illustrative_scenario,1000000,20,0.01,0.002,0.50,0.99,500,250
+

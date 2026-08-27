@@ -1,0 +1,6 @@
+event_id,domain,period,recovery_horizon_days,gross_loss,recovered_at_horizon,classification,source_id,valuation_rule,event_definition
+cash_2019_a,us_reported_currency,2019,source_recorded,1000000000,25000000,empirical_calibration,fbi_cius_2019_table24,reported_usd,reported stolen currency
+cash_2019_b,us_reported_currency,2019,source_recorded,423559757,11980933,empirical_calibration,fbi_cius_2019_table24,reported_usd,reported stolen currency
+synthetic_a,synthetic_custody,illustrative,365,800000,100000,illustrative_scenario,synthetic,constant_usd,unauthorized transfer
+synthetic_b,synthetic_custody,illustrative,365,200000,50000,illustrative_scenario,synthetic,constant_usd,unauthorized transfer
+

@@ -1,0 +1,9 @@
+vector_id,secret_hex,coefficients_hex_json,x,classification,field_profile
+shamir_2of3,1f1e1d1c1b1a191817161514131211100f0e0d0c0b0a09080706050403020100,"[""a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5""]",1,deterministic_test_vector,prime521-v1
+shamir_2of3,1f1e1d1c1b1a191817161514131211100f0e0d0c0b0a09080706050403020100,"[""a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5""]",2,deterministic_test_vector,prime521-v1
+shamir_2of3,1f1e1d1c1b1a191817161514131211100f0e0d0c0b0a09080706050403020100,"[""a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5""]",3,deterministic_test_vector,prime521-v1
+shamir_3of5,123456789abcdef00112233445566778899aabbccddeeff,"[""1111111111111111"", ""2222222222222222""]",1,deterministic_test_vector,prime521-v1
+shamir_3of5,123456789abcdef00112233445566778899aabbccddeeff,"[""1111111111111111"", ""2222222222222222""]",2,deterministic_test_vector,prime521-v1
+shamir_3of5,123456789abcdef00112233445566778899aabbccddeeff,"[""1111111111111111"", ""2222222222222222""]",3,deterministic_test_vector,prime521-v1
+shamir_3of5,123456789abcdef00112233445566778899aabbccddeeff,"[""1111111111111111"", ""2222222222222222""]",4,deterministic_test_vector,prime521-v1
+shamir_3of5,123456789abcdef00112233445566778899aabbccddeeff,"[""1111111111111111"", ""2222222222222222""]",5,deterministic_test_vector,prime521-v1
