@@ -1,0 +1,8 @@
+equation,scenario_id,classification,n,unit_value,expected_loss,catastrophic_loss_probability
+20,independent,illustrative_scenario,1,1000000.0,10000.0,0.01
+20,independent,illustrative_scenario,2,500000.0,10000.0,0.0001
+20,independent,illustrative_scenario,5,200000.0,10000.0,1.0000000000000002e-10
+20,independent,illustrative_scenario,10,100000.0,10000.0,1.0000000000000002e-20
+20,correlated,illustrative_scenario,2,500000.0,10000.0,0.0020998
+20,correlated,illustrative_scenario,5,200000.0,10000.0,0.0020000000998
+20,correlated,illustrative_scenario,10,100000.0,10000.0,0.002

@@ -1,0 +1,4 @@
+scenario_id,classification,q,p,baseline_wealth,gain,execution_cost,penalty,recovery,utility_family,risk_aversion
+illustrative_linear,illustrative_scenario,0.35,0.08,100000,25000,3000,50000,10000,linear,0
+illustrative_crra,illustrative_scenario,0.35,0.08,100000,25000,3000,50000,10000,crra,2
+

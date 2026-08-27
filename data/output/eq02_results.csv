@@ -1,0 +1,3 @@
+equation,scenario_id,classification,expected_payoff
+2,illustrative_linear,illustrative_scenario,4070.0
+2,illustrative_crra,illustrative_scenario,4070.0

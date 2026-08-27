@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=75", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cryptoeconomic-theft-asymmetry"
+version = "1.0.0"
+description = "Computational reproduction suite for cryptoeconomic theft-asymmetry models"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+authors = [{name = "Alex Breton"}]
+dependencies = ["numpy>=2.0,<3", "pandas>=2.2,<4"]
+
+[project.optional-dependencies]
+report = ["matplotlib>=3.9,<4", "jupyterlab>=4.2,<5", "nbconvert>=7.16,<8", "nbformat>=5.10,<6"]
+test = ["pytest>=8.3,<9"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+

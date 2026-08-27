@@ -1,118 +1,147 @@
-# Cryptoeconomic Theft Asymmetry & Cold Storage Reproduction Suite
-This repository contains the official open-science reproduction suite, empirical datasets, mathematical models, and cryptographic verification scripts accompanying the academic research manuscript:
-"The Asymmetric Attack Surface of Fiat Substitutes: Modeling Theft Probabilities and Air-Gapped Physical Mitigations for Digital Asset Cold Storage"<br>
+# Cryptoeconomic Theft Asymmetry: Reproduction Suite
 
-Target Journal: Journal of FinTech and Digital Assets (JFDA)
+This repository is the computational companion to **“The Asymmetric Attack
+Surface of Fiat Substitutes: A Measurement Framework and Owner-Bound Offline
+Custody Architecture.”** It provides executable specifications for all 21 numbered
+display equations, machine-readable inputs and outputs, deterministic cryptographic
+test vectors, an integrated notebook, and continuous-integration checks.
 
-The repository allows automated validation, and computational reproducibility of all econometric and cryptoeconomic models in the above research report.
+The repository separates empirical calibrations from illustrative scenarios. It
+does **not** publish a global “per-dollar theft probability,” an empirical
+cash-versus-crypto Relative Vulnerability Ratio (RVR), or a cross-domain deterrence
+ratio: the available public data do not meet the manuscript’s matching conditions.
 
----
+## What is reproducible
 
-## Environment & Prerequisites
+- Equations 1–3: offender utility, risk-neutral payoff, and reusable-attack scale
+- Equations 4–6: stage-specific enforcement transitions and conditional deterrence ratio
+- Equations 7–10: gross/net losses, time-weighted exposure, loss intensity, and metadata-gated RVR
+- Equations 11–13: 2019 U.S. reported-currency calibration
+- Equations 14–17: XOR and Shamir algebra with deterministic known-answer tests
+- Equations 18–21: partition expectation, correlated variance, common-mode tail loss, and exact discrete CVaR optimization
 
-* **Python Version:** Python **3.10** or higher (tested on Python 3.10, 3.11, 3.12, and 3.14).
-* **Package Dependencies:** `numpy`, `pandas`, `jupyterlab`, `tabulate`.
+The canonical map from equation to script, input, output, and evidence class is
+[`data/equation_registry.csv`](data/equation_registry.csv).
 
----
+## Repository structure
 
-# Quick-Start Reproduction Guide
+```text
+.
+├── src/theft_asymmetry/       # Tested model and runner library
+├── scripts/                   # One executable script per equation + unified runner
+├── data/
+│   ├── input/                 # Empirical calibration, scenarios, and test vectors
+│   ├── output/                # Deterministically regenerated CSV results
+│   └── equation_registry.csv  # Equation-to-code audit trail
+├── tests/                     # Algebra, numerical invariants, and non-estimate gates
+├── docs/                      # Methodology, data dictionary, and limitations
+├── figures/                   # Notebook-generated figures
+├── reproduce_report_figures.ipynb
+└── .github/workflows/reproducibility.yml
+```
 
-## Option A: macOS / Linux (Terminal / Bash)
+Legacy files are retained under `legacy/` only to preserve provenance. They are not
+part of the current reproduction path because they used unmatched denominators and
+unsupported enforcement quantities.
 
-### 1. Clone the repository
-git clone [https://github.com/printdreams/cryptoeconomic-theft-asymmetry.git](https://github.com/printdreams/cryptoeconomic-theft-asymmetry.git)
+## Quick start
+
+Python 3.10 or later is required.
+
+```bash
+git clone https://github.com/printdreams/cryptoeconomic-theft-asymmetry.git
 cd cryptoeconomic-theft-asymmetry
+python3 -m venv .venv
+source .venv/bin/activate          # Windows: .venv\Scripts\activate
+python -m pip install --upgrade pip
+python -m pip install -r requirements-lock.txt
+python -m pip install -e . --no-deps
+make verify
+```
 
-### 2. Create and activate a virtual environment
-python3 -m venv venv
-source venv/bin/activate
+Without `make`, run:
 
-### 3. Upgrade package installer and install requirements
-pip install --upgrade pip setuptools wheel
-pip install -r requirements.txt
+```bash
+python scripts/reproduce_all.py
+python -m pytest
+python -m nbconvert --to notebook --execute \
+  reproduce_report_figures.ipynb \
+  --output reproduce_report_figures.ipynb \
+  --ExecutePreprocessor.timeout=180
+```
 
-### 4. Run Econometric Models (Generates CSVs in /outputs)
-python scripts/reproduce_models.py
+Run one equation independently:
 
-### 5. Run Cryptographic Self-Test (Verifies Galois Field Shamir Scheme)
-python scripts/shamir_gf256.py
+```bash
+python scripts/eq11_cash_gross_intensity.py
+# or
+python scripts/run_equation.py 11 --output /tmp/eq11.csv
+```
 
-### 6. Launch Interactive Jupyter Notebook
-jupyter lab notebooks/reproduce_report_figures.ipynb<br><br>
-Alternatively you can run it directly using Jupyter's nbviewer:<br>
-https://nbviewer.org/github/printdreams/cryptoeconomic-theft-asymmetry/blob/main/notebooks/reproduce_report_figures.ipynb
-<br><br><br>
-## Option B: Windows (PowerShell)
-On Windows PowerShell, execution policies or shell environment aliases can occasionally restrict script activation. Follow these tested instructions:
+## Empirical calibration and non-estimates
 
-### 1. Clone the repository
-git clone [https://github.com/printdreams/cryptoeconomic-theft-asymmetry.git](https://github.com/printdreams/cryptoeconomic-theft-asymmetry.git)
-cd cryptoeconomic-theft-asymmetry
+The committed U.S. cash calibration uses:
 
-### 2. Create virtual environment
-py -3 -m venv venv
+- reported stolen currency: USD 1,423,559,757;
+- reported recovered currency: USD 36,980,933; and
+- year-end currency in circulation: USD 1,759,800,000,000.
 
-### 3. Option B1 (Standard Activation): Allow script execution for current session
-Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process
-.\venv\Scripts\Activate.ps1
+The scripts reproduce a gross reported loss intensity of approximately 0.080893%,
+a recovery share of approximately 2.5978%, and a net reported loss intensity of
+approximately 0.078792%. These are lower-bound reported-value calibrations. The
+stock denominator includes currency abroad and is not average value exposed to
+theft.
 
-### 4. Install dependencies into virtual environment
-python -m pip install --upgrade pip setuptools wheel
-pip install -r requirements.txt
+The 2024 Chainalysis and TRM Labs estimates of roughly USD 2.2 billion stolen are
+not divided by stablecoin supply or total crypto market capitalization. Their
+incident perimeters do not supply a matched reachable-exposure denominator. The
+RVR runner therefore rejects the included cash-versus-crypto example and records
+`not_estimated` with the mismatched fields.
 
-### 5. Run Econometric Models and Cryptographic Self-Test
-python scripts/reproduce_models.py
-python scripts/shamir_gf256.py
+Likewise, clearance, identification, arrest, prosecution, and conviction are
+distinct stages. Equation 6 produces a number only for a metadata-matched scenario;
+the unmatched public-source row is retained as a machine-checkable non-estimate.
 
-### 6. Launch Jupyter Lab
-jupyter lab notebooks/reproduce_report_figures.ipynb<br><br>
-Alternatively you can run it directly using Jupyter's nbviewer:<br> 
-https://nbviewer.org/github/printdreams/cryptoeconomic-theft-asymmetry/blob/main/notebooks/reproduce_report_figures.ipynb
-<br><br>
-## Note for Windows Users (Direct Execution Fallback): 
-If PowerShell prevents environment activation, you can execute all commands directly via the virtual environment's binary without modifying system execution policies:
+## Cryptographic scope
 
-.\venv\Scripts\python.exe -m pip install --upgrade pip setuptools wheel
-.\venv\Scripts\python.exe -m pip install -r requirements.txt
-.\venv\Scripts\python.exe scripts/reproduce_models.py
-.\venv\Scripts\python.exe scripts/shamir_gf256.py
-.\venv\Scripts\python.exe -m jupyter lab notebooks/reproduce_report_figures.ipynb
-<br><br><br>
-# Output Verification
-Upon executing scripts/reproduce_models.py, 
-the following output tables are automatically created in the outputs/ folder:
+XOR and Shamir files are conformance tests, not production custody software.
+Deterministic values are never suitable as production entropy.
 
-### 1. table1_monetary_loss_asymmetry.csv: 
-Contains exact loss rates ($L_r$) and vulnerability ratios ($\text{RVR}_{agg} = 12.84\times$, $\text{RVR}_{vault} = 560.48\times$).
+Shamir examples use the versioned `prime521-v1` profile over the prime field
+$p=2^{521}-1$. This admits every 256-bit secret without modular truncation and makes
+the field and encoding assumptions explicit. The suite intentionally makes no
+`GF(2^{256})` claim. A binary-field profile must first specify a vetted irreducible
+polynomial, polynomial-basis encoding, byte order, share-index rules, known-answer
+vectors, malformed-input behavior, and independent review.
 
-### 2. table2_clearance_enforcement_gap.csv: 
-Summarizes conviction probabilities ($p$) and deterrence gaps ($\mathcal{D}_R$).
+Secret sharing is not threshold signing and does not authenticate shares. Real
+deployments must address entropy, independent control, authenticated envelopes,
+pre-funding verification, parser and firmware risk, zeroization limits,
+supply-chain compromise, side channels, coercion, recovery, and common-mode failure.
 
-### 3. value_partitioning_model.csv: 
-Displays loss variance reduction ($\text{Var}/N$) and tail-risk decay ($p^N$) across $N \in \{1, 2, 5, 10, 50, 100\}$.
+## Inputs, outputs, and auditability
 
-Running scripts/shamir_gf256.py performs a cryptographic self-test over $GF(2^{256})$ using the primitive polynomial $P(x) = x^{256} + x^{10} + x^5 + x^2 + 1$ (POLYNOMIAL = (1 << 256) | 0x425), confirming:
+CSV fields and provenance are described in [`docs/data_dictionary.md`](docs/data_dictionary.md).
+Model assumptions and numerical conventions are described in
+[`docs/methodology.md`](docs/methodology.md). Each generated CSV contains an
+`equation` column and retains an evidence classification.
 
-### - 256-bit key secret splitting into 2 shares.
-### - Lagrange polynomial interpolation key reconstruction at $x = 0$.
-### - Single-share corruption rejection.
-<br><br><br>
-# License
-This project uses a dual-license model to distinguish between open-source code and open-access research data:
+The GitHub Actions workflow runs the 21 equations, unit tests, and notebook on
+Python 3.10 and 3.12. It then fails if regenerated CSV outputs differ from the
+committed versions. `requirements-lock.txt` defines the reference environment;
+`pyproject.toml` retains compatible ranges for library consumers.
 
-Source Code & Software: Distributed under the MIT License. Free for reuse, modification, and integration. See LICENSE-MIT.
+## Primary empirical sources
 
-Data, Reports & Visualizations: Distributed under Creative Commons Attribution 4.0 International (CC BY 4.0). Free to share and adapt with appropriate attribution. See LICENSE-CC-BY-4.0.
-<br><br><br>
-# Citation & Metadata
-If you use this codebase, empirical data, or cryptographic implementations in your research, please cite it using the following metadata (BibTeX):
-<br><br>
-@article{printdreams_crypto_theft_2026,
-  author    = {Alex Breton},
-  title     = {The Asymmetric Attack Surface of Fiat Substitutes: Modeling Theft Probabilities and Air-Gapped Physical Mitigations for Digital Asset Cold Storage},
-  journal   = {Journal of FinTech and Digital Assets (JFDA)},
-  year      = {2026},
-  doi       = {10.5281/zenodo.22057611},
-  publisher = {Zenodo},
-  url       = {[https://github.com/printdreams/cryptoeconomic-theft-asymmetry](https://github.com/printdreams/cryptoeconomic-theft-asymmetry)}
-}
+- [FBI Crime in the United States 2019, Table 24](https://ucr.fbi.gov/crime-in-the-u.s/2019/crime-in-the-u.s.-2019/topic-pages/tables/table-24)
+- [Federal Reserve Board, Currency in Circulation: Value](https://www.federalreserve.gov/paymentsystems/coin_currcircvalue.htm)
+- [Chainalysis 2024 hacking update](https://www.chainalysis.com/blog/crypto-hacking-stolen-funds-2025/)
+- [TRM Labs 2024 hacks analysis](https://www.trmlabs.com/resources/blog/category-deep-dive-2-2-billion-was-stolen-in-crypto-related-hacks-in-2024)
+
+## License and citation
+
+Source code is available under the MIT License. Data, reports, and visualizations
+are available under CC BY 4.0; see `LICENSE-MIT` and `LICENSE-CC-BY-4.0`.
+
+Citation metadata are supplied in `CITATION-draft.cff` and `CITATION-draft.bib`.
+Update the draft fields when the manuscript receives final bibliographic metadata.

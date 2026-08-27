@@ -1,0 +1,4 @@
+scenario_id,classification,p_cash,p_digital,metadata_matched,notes
+matched_sensitivity_example,illustrative_scenario,0.20,0.05,True,Synthetic matched-cohort sensitivity only
+unmatched_public_sources,empirical_nonestimate,0.1625,0.003,False,Clearance and assumed conviction quantities are not equivalent cohorts
+

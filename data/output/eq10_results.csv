@@ -1,0 +1,3 @@
+equation,scenario_id,classification,status,rvr,reason
+10,matched_synthetic,illustrative_scenario,estimated,4.0,
+10,cash_crypto_unmatched,empirical_nonestimate,not_estimated,,"unmatched RVR metadata: period, geography, asset_perimeter, custody_perimeter, event_definition, valuation_rule, exposure_concept, reporting_coverage"

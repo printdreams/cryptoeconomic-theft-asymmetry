@@ -1,1 +1,1 @@
-All datasets and CSV files in this directory are governed by the Creative Commons Attribution 4.0 International License (CC-BY 4.0).
+Generated equation CSVs are now committed under `../data/output/`. Data and report artifacts are governed by CC BY 4.0.

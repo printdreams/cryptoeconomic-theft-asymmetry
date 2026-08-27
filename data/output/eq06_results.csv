@@ -1,0 +1,3 @@
+equation,scenario_id,classification,status,deterrence_ratio,reason
+6,matched_sensitivity_example,illustrative_scenario,estimated,4.0,
+6,unmatched_public_sources,empirical_nonestimate,not_estimated,,cohort metadata are not matched

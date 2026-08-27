@@ -1,0 +1,9 @@
+scenario_id,classification,wealth,n,p,rho,q
+independent,illustrative_scenario,1000000,1,0.01,0,0
+independent,illustrative_scenario,1000000,2,0.01,0,0
+independent,illustrative_scenario,1000000,5,0.01,0,0
+independent,illustrative_scenario,1000000,10,0.01,0,0
+correlated,illustrative_scenario,1000000,2,0.01,0.25,0.002
+correlated,illustrative_scenario,1000000,5,0.01,0.25,0.002
+correlated,illustrative_scenario,1000000,10,0.01,0.25,0.002
+

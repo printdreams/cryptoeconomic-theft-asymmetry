@@ -1,0 +1,7 @@
+equation,scenario_id,classification,n,expected_loss,cvar,cost,objective,is_minimum
+21,institutional_sensitivity,illustrative_scenario,1,11980.000000000002,1000000.0,750,512730.0,False
+21,institutional_sensitivity,illustrative_scenario,2,11980.000000000002,604989.9999999999,1000,315474.99999999994,False
+21,institutional_sensitivity,illustrative_scenario,3,11979.999999999998,476613.39999999985,1250,251536.69999999992,False
+21,institutional_sensitivity,illustrative_scenario,5,11979.999999999998,379761.39600399986,1750,203610.69800199993,False
+21,institutional_sensitivity,illustrative_scenario,10,11980.0,323733.1085878686,3000,176846.5542939343,False
+21,institutional_sensitivity,illustrative_scenario,20,11979.999999999998,285227.5238082795,5500,160093.76190413974,True

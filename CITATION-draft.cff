@@ -1,11 +1,11 @@
 cff-version: 1.2.0
 message: "If you utilize this research report, data, or reproduction codebase, please cite it as below."
-title: "The Asymmetric Attack Surface of Fiat Substitutes: Modeling Theft Probabilities and Air-Gapped Physical Mitigations for Digital Asset Cold Storage"
+title: "The Asymmetric Attack Surface of Fiat Substitutes: A Measurement Framework and Owner-Bound Offline Custody Architecture"
 authors:
   - family-names: "Breton"
     given-names: "Alex"
     orcid: "https://orcid.org/0000-0000-0000-0000"
-date-released: 2026-08-xx
+date-released: 2026-08-26
 repository-code: "https://github.com/printdreams/cryptoeconomic-theft-asymmetry"
 keywords:
   - Air-gapped custody
