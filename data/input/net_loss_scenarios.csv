@@ -1,0 +1,5 @@
+scenario_id,classification,controls,recovery_horizon_days,weights_json,probabilities_json,loss_indicators_json,recovered_fractions_json
+unequal_dependent_recovery,illustrative_scenario,unequal_dependent_recovery,365,"[100, 200]","[0.5, 0.25, 0.25]","[[0, 0], [1, 0], [1, 1]]","[[0, 0], [0.5, 0], [0, 0.5]]"
+equal_independent_no_recovery,illustrative_scenario,equal_independent_no_recovery,365,"[100, 100]","[0.25, 0.25, 0.25, 0.25]","[[0, 0], [1, 0], [0, 1], [1, 1]]","[[0, 0], [0, 0], [0, 0], [0, 0]]"
+equal_common_mode_no_recovery,illustrative_scenario,equal_common_mode_no_recovery,365,"[100, 100]","[0.5, 0.5]","[[0, 0], [1, 1]]","[[0, 0], [0, 0]]"
+zero_loss_and_full_recovery,illustrative_scenario,zero_loss_and_full_recovery,365,"[100, 200]","[0.5, 0.5]","[[0, 0], [0, 1]]","[[0, 0], [0, 1]]"

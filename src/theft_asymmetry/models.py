@@ -1,4 +1,4 @@
-"""Reference implementations of the manuscript's 21 numbered equations.
+"""Reference implementations of manuscript Equations 1–21, 21a, and 21b.
 
 The functions are deliberately small and side-effect free.  Empirical estimates
 and illustrative scenarios remain distinguishable in every output table.
@@ -274,3 +274,44 @@ def _partition_inputs(wealth: float, n: int, p: float) -> None:
         raise ValueError("wealth must be non-negative and N a positive integer")
     _probabilities(p=p)
 
+
+
+def net_loss_moments(weights, probabilities, loss_indicators, recovered_fractions) -> dict:
+    """Equations 21a–21b for a finite joint distribution conditional on controls z.
+
+    Rows are joint outcomes over a fixed period and recovery horizon h; columns
+    are compartments with fixed balances. Recovery fractions can depend on the
+    entire outcome. No compromise/recovery or cross-compartment independence is
+    imposed. A freeze alone must not be recorded as recovered value.
+    """
+    w = np.asarray(weights, dtype=float)
+    p = np.asarray(probabilities, dtype=float)
+    x = np.asarray(loss_indicators, dtype=float)
+    r = np.asarray(recovered_fractions, dtype=float)
+    if w.ndim != 1 or not w.size or not np.isfinite(w).all() or (w < 0).any():
+        raise ValueError("weights must be a nonempty vector of finite non-negative balances")
+    if (p.ndim != 1 or not p.size or not np.isfinite(p).all()
+            or (p < 0).any() or (p > 1).any()
+            or not math.isclose(float(p.sum()), 1.0, rel_tol=0, abs_tol=1e-12)):
+        raise ValueError("outcome probabilities must be finite, in [0, 1], and sum to one")
+    if x.shape != (p.size, w.size) or r.shape != x.shape:
+        raise ValueError("indicator and recovery matrices must have outcome-by-compartment shape")
+    if not np.isin(x, [0, 1]).all():
+        raise ValueError("loss indicators must be binary")
+    if not np.isfinite(r).all() or (r < 0).any() or (r > 1).any():
+        raise ValueError("recovered fractions must be finite and lie in [0, 1]")
+    # u_i = Pr(X_i=1|z); conditional recovery is zero when u_i=0.
+    u = p @ x
+    conditional_recovery = np.divide(p @ (x * r), u, out=np.zeros_like(u), where=u > 0)
+    y = x * (1 - r)
+    losses = y @ w
+    expected = float(w @ (u * (1 - conditional_recovery)))
+    centered = y - p @ y
+    # Population covariance under the specified joint probabilities, not a
+    # sample covariance estimator. Includes diagonal and both off-diagonal terms.
+    covariance = centered.T @ (p[:, None] * centered)
+    variance = float(w @ covariance @ w)
+    return {"net_losses": losses, "compromise_probabilities": u,
+            "conditional_recovery_fractions": conditional_recovery,
+            "expected_net_loss": expected, "net_loss_fraction_covariance": covariance,
+            "net_loss_variance": variance}

@@ -19,16 +19,21 @@ def _rows(name: str) -> pd.DataFrame:
     return pd.read_csv(INPUT / name, keep_default_na=False)
 
 
-def _write(number: int, frame: pd.DataFrame, output_path: Path | None) -> Path:
-    path = output_path or OUTPUT / f"eq{number:02d}_results.csv"
+def _write(number: int | str, frame: pd.DataFrame, output_path: Path | None) -> Path:
+    path = output_path or OUTPUT / f"eq{str(number).zfill(2)}_results.csv"
     path.parent.mkdir(parents=True, exist_ok=True)
     frame.insert(0, "equation", number)
     frame.to_csv(path, index=False)
     return path
 
 
-def run_equation(number: int, output_path: Path | None = None) -> Path:
+EQUATIONS = (*range(1, 22), "21a", "21b")
+
+
+def run_equation(number: int | str, output_path: Path | None = None) -> Path:
     """Evaluate one numbered display equation from committed CSV inputs."""
+    if isinstance(number, str) and number.isdigit():
+        number = int(number)
     if number == 1:
         x = _rows("offender_scenarios.csv")
         x["expected_utility"] = x.apply(lambda r: m.expected_utility(
@@ -176,12 +181,30 @@ def run_equation(number: int, output_path: Path | None = None) -> Path:
                             "n": int(r.n), **values})
         out = pd.DataFrame(records)
         out["is_minimum"] = out.groupby("scenario_id")["objective"].transform("min").eq(out["objective"])
+    elif number in ("21a", "21b"):
+        records = []
+        for r in _rows("net_loss_scenarios.csv").itertuples():
+            result = m.net_loss_moments(
+                json.loads(r.weights_json), json.loads(r.probabilities_json),
+                json.loads(r.loss_indicators_json), json.loads(r.recovered_fractions_json))
+            record = {"scenario_id": r.scenario_id, "classification": r.classification,
+                      "controls": r.controls, "recovery_horizon_days": r.recovery_horizon_days}
+            if number == "21a":
+                record.update(net_losses_json=json.dumps(result["net_losses"].tolist()),
+                              compromise_probabilities_json=json.dumps(result["compromise_probabilities"].tolist()),
+                              conditional_recovery_fractions_json=json.dumps(result["conditional_recovery_fractions"].tolist()),
+                              expected_net_loss=result["expected_net_loss"])
+            else:
+                record.update(net_loss_fraction_covariance_json=json.dumps(result["net_loss_fraction_covariance"].tolist()),
+                              net_loss_variance=result["net_loss_variance"])
+            records.append(record)
+        out = pd.DataFrame(records)
     else:
-        raise ValueError("equation number must lie in 1..21")
+        raise ValueError("equation must be 1..21, 21a, or 21b")
     return _write(number, out.copy(), output_path)
 
 
 def run_all() -> list[Path]:
     OUTPUT.mkdir(parents=True, exist_ok=True)
-    return [run_equation(number) for number in range(1, 22)]
+    return [run_equation(number) for number in EQUATIONS]
 

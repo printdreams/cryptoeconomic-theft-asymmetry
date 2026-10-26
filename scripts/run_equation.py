@@ -6,12 +6,12 @@ from __future__ import annotations
 import argparse
 from pathlib import Path
 
-from theft_asymmetry.runner import run_equation
+from theft_asymmetry.runner import EQUATIONS, run_equation
 
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("number", type=int, choices=range(1, 22))
+    parser.add_argument("number", choices=[str(number) for number in EQUATIONS])
     parser.add_argument("--output", type=Path)
     args = parser.parse_args()
     print(run_equation(args.number, args.output))

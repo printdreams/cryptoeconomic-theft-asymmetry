@@ -1,0 +1,5 @@
+equation,scenario_id,classification,controls,recovery_horizon_days,net_losses_json,compromise_probabilities_json,conditional_recovery_fractions_json,expected_net_loss
+21a,unequal_dependent_recovery,illustrative_scenario,unequal_dependent_recovery,365,"[0.0, 50.0, 200.0]","[0.5, 0.25]","[0.25, 0.5]",62.5
+21a,equal_independent_no_recovery,illustrative_scenario,equal_independent_no_recovery,365,"[0.0, 100.0, 100.0, 200.0]","[0.5, 0.5]","[0.0, 0.0]",100.0
+21a,equal_common_mode_no_recovery,illustrative_scenario,equal_common_mode_no_recovery,365,"[0.0, 200.0]","[0.5, 0.5]","[0.0, 0.0]",100.0
+21a,zero_loss_and_full_recovery,illustrative_scenario,zero_loss_and_full_recovery,365,"[0.0, 0.0]","[0.0, 0.5]","[0.0, 1.0]",0.0

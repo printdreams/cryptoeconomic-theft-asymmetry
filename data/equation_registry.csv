@@ -21,3 +21,5 @@ equation,manuscript_section,short_name,latex,script,input_csv,output_csv,evidenc
 20,6,Common-mode catastrophic loss,"\Pr(L=W)=q+(1-q)p^N",scripts/eq20_common_mode_catastrophic_loss.py,data/input/partition_scenarios.csv,data/output/eq20_results.csv,illustrative
 21,6,Partition objective,"\min_N\mathbb{E}[L_N]+\lambda\mathrm{CVaR}_\alpha(L_N)+C(N)",scripts/eq21_partition_cvar_optimization.py,data/input/optimization_scenarios.csv,data/output/eq21_results.csv,illustrative
 
+21a,6.1,Net loss and conditional expectation,"L_h=\sum_i w_i X_i[1-r_i(h)]; E[L_h|z]=\sum_i w_i u_i(z)[1-\bar r_i(h,z)]",scripts/eq21a_net_loss_expectation.py,data/input/net_loss_scenarios.csv,data/output/eq21a_results.csv,illustrative
+21b,6.1,Net loss covariance,"Var(L_h|z)=\sum_i\sum_j w_i w_j Cov(Y_i,Y_j|z); Y_i=X_i[1-r_i(h)]",scripts/eq21b_net_loss_covariance.py,data/input/net_loss_scenarios.csv,data/output/eq21b_results.csv,illustrative

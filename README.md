@@ -3,8 +3,8 @@
 This repository is the computational companion to **“The Asymmetric Attack
 Surface of Fiat Substitutes: A Measurement Framework and Owner-Bound Offline
 Custody Architecture.”** It provides executable specifications for all 21 numbered
-display equations, machine-readable inputs and outputs, deterministic cryptographic
-test vectors, an integrated notebook, and continuous-integration checks.
+display equations plus Equations (21a)–(21b), machine-readable inputs and outputs,
+deterministic cryptographic test vectors, an integrated notebook, and continuous-integration checks.
 
 The repository separates empirical calibrations from illustrative scenarios. It
 does **not** publish a global “per-dollar theft probability,” an empirical
@@ -19,6 +19,7 @@ ratio: the available public data do not meet the manuscript’s matching conditi
 - Equations 11–13: 2019 U.S. reported-currency calibration
 - Equations 14–17: XOR and Shamir algebra with deterministic known-answer tests
 - Equations 18–21: partition expectation, correlated variance, common-mode tail loss, and exact discrete CVaR optimization
+- Equations (21a)–(21b): horizon-specific net loss, conditional recovery, and joint covariance
 
 The canonical map from equation to script, input, output, and evidence class is
 [`data/equation_registry.csv`](data/equation_registry.csv).
@@ -76,6 +77,8 @@ Run one equation independently:
 python scripts/eq11_cash_gross_intensity.py
 # or
 python scripts/run_equation.py 11 --output /tmp/eq11.csv
+python scripts/run_equation.py 21a --output /tmp/eq21a.csv
+python scripts/run_equation.py 21b --output /tmp/eq21b.csv
 ```
 
 ## Empirical calibration and non-estimates
@@ -126,8 +129,8 @@ Model assumptions and numerical conventions are described in
 [`docs/methodology.md`](docs/methodology.md). Each generated CSV contains an
 `equation` column and retains an evidence classification.
 
-The GitHub Actions workflow runs the 21 equations, unit tests, and notebook on
-Python 3.10 and 3.12. It then fails if regenerated CSV outputs differ from the
+The GitHub Actions workflow runs the 23 equation entries (1–21, 21a, and 21b),
+unit tests, and notebook on Python 3.10 and 3.12. It then fails if regenerated CSV outputs differ from the
 committed versions. `requirements-lock.txt` defines the reference environment;
 `pyproject.toml` retains compatible ranges for library consumers.
 

@@ -71,3 +71,54 @@ def test_equation_21_distribution_and_cvar():
     result = m.partition_objective(1_000_000, 10, .01, .002, .5, .99, 500, 250)
     assert result["expected_loss"] == pytest.approx(11_980)
     assert result["cvar"] >= result["expected_loss"]
+
+
+def test_net_loss_with_outcome_dependent_recovery_and_unequal_balances():
+    # Joint outcomes: no loss, first-only with half recovery, both with
+    # recovery only in the second compartment. L = [0, 50, 200].
+    result = m.net_loss_moments([100, 200], [.5, .25, .25],
+                                [[0, 0], [1, 0], [1, 1]],
+                                [[0, 0], [.5, 0], [0, .5]])
+    assert result['net_losses'] == pytest.approx([0, 50, 200])
+    assert result['compromise_probabilities'] == pytest.approx([.5, .25])
+    assert result['conditional_recovery_fractions'] == pytest.approx([.25, .5])
+    assert result['expected_net_loss'] == pytest.approx(62.5)
+    assert result['net_loss_variance'] == pytest.approx(6718.75)
+    assert result['net_loss_fraction_covariance'][0, 1] == pytest.approx(.078125)
+    # Direct enumeration independently verifies both analytical identities.
+    mean = sum(p*l for p, l in zip([.5, .25, .25], [0, 50, 200]))
+    assert mean == pytest.approx(result['expected_net_loss'])
+    assert sum(p*(l-mean)**2 for p, l in zip([.5, .25, .25], [0, 50, 200])) == pytest.approx(result['net_loss_variance'])
+
+
+@pytest.mark.parametrize('rho,probabilities,indicators', [
+    (0, [.25]*4, [[0, 0], [1, 0], [0, 1], [1, 1]]),
+    (1, [.5, .5], [[0, 0], [1, 1]]),
+    (-1, [.5, .5], [[1, 0], [0, 1]]),
+])
+def test_net_loss_reduces_to_equations_18_and_19(rho, probabilities, indicators):
+    result = m.net_loss_moments([100, 100], probabilities, indicators, [[0, 0]]*len(probabilities))
+    assert result['expected_net_loss'] == pytest.approx(m.partition_expected_loss(200, 2, .5)[1])
+    assert result['net_loss_variance'] == pytest.approx(m.equicorrelated_variance(200, 2, .5, rho))
+
+
+def test_zero_probability_loss_and_full_recovery():
+    result = m.net_loss_moments([100, 200], [.5, .5], [[0, 0], [0, 1]], [[0, 0], [0, 1]])
+    assert result['conditional_recovery_fractions'] == pytest.approx([0, 1])
+    assert result['expected_net_loss'] == 0
+    assert result['net_loss_variance'] == 0
+
+
+@pytest.mark.parametrize('weights,probabilities,indicators,recovery', [
+    ([-1], [1], [[1]], [[0]]),
+    ([float('inf')], [1], [[1]], [[0]]),
+    ([1], [.9], [[1]], [[0]]),
+    ([1], [-.1, 1.1], [[0], [1]], [[0], [0]]),
+    ([1], [1], [[.5]], [[0]]),
+    ([1], [1], [[1]], [[1.1]]),
+    ([1], [1], [[1]], [[float('nan')]]),
+    ([1, 2], [1], [[1]], [[0]]),
+])
+def test_net_loss_rejects_invalid_joint_distributions(weights, probabilities, indicators, recovery):
+    with pytest.raises(ValueError):
+        m.net_loss_moments(weights, probabilities, indicators, recovery)

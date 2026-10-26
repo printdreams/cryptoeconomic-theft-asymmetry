@@ -49,3 +49,27 @@ binomial. Upper-tail CVaR includes fractional probability mass at the discrete
 quantile boundary. The enumerated minimum is conditional on the committed scenario
 parameters and feasible values of $N$.
 
+
+## Net loss and dependence (revised manuscript Section 6.1)
+
+Equations (21a)–(21b) extend the partition framework to unequal, fixed compartment
+balances and recovery by a specified horizon. The observation period has no
+replenishment or repeated counting. With controls z fixed, the finite joint
+outcomes specify both loss indicators X_i and recovered fractions r_i(h).
+The implementation computes L_h = sum_i w_i X_i(1-r_i(h)) and
+u_i(z) = Pr(X_i=1|z), then conditional mean recovery
+r̄_i(h,z) = E[r_i(h)|X_i=1,z] (zero when u_i=0). The expectation is
+sum_i w_i u_i(z)(1-r̄_i(h,z)). No independence of recovery and compromise is assumed;
+recovery need not depend on conviction, and freezing alone is not recovery.
+
+For Y_i = X_i(1-r_i(h)), the population covariance of the supplied joint distribution
+is used in Var(L_h|z) = sum_i sum_j w_i w_j Cov(Y_i,Y_j|z), including diagonal
+and both off-diagonal terms. Common-mode outcomes therefore enter directly.
+The examples include outcome-dependent recovery with unequal balances,
+independent and common-mode losses without recovery, and zero-probability loss/full
+recovery. Tests verify direct enumeration and the reductions to Equations (18)–(19),
+including negative dependence. These are analytical identities, not empirical
+estimates or a causal model of how controls or attacker selection determine u_i.
+The existing Equation (21) scenario remains its original gross-loss/no-recovery
+special case; the new net-loss distribution can supply a net-loss objective in
+future calibrated analyses.

@@ -53,7 +53,7 @@ def build() -> None:
     }
     cells = [nbf.v4.new_markdown_cell(
         "# Reproduction of report equations and figures\n\n"
-        "This notebook executes all 21 numbered equations from the manuscript. "
+        "This notebook executes all 21 numbered equations and Equations (21a)–(21b) from the manuscript. "
         "Rows labelled `illustrative_scenario` or `deterministic_test_vector` are "
         "not empirical estimates. The cash-versus-crypto RVR and unmatched "
         "enforcement comparison are intentionally returned as `not_estimated`."
@@ -69,7 +69,7 @@ def build() -> None:
         "sys.path.insert(0, str(ROOT / 'src'))\n"
         "from theft_asymmetry.runner import run_all\n"
         "outputs = run_all()\n"
-        "assert len(outputs) == 21\n"
+        "assert len(outputs) == 23\n"
         "print('Generated', len(outputs), 'equation outputs')"
     ))
     for number, (name, formula) in enumerate(zip(NAMES, FORMULAS), start=1):
@@ -84,6 +84,28 @@ def build() -> None:
         cells.append(nbf.v4.new_code_cell(
             f"eq{number:02d} = pd.read_csv(ROOT / 'data/output/eq{number:02d}_results.csv')\n"
             f"eq{number:02d}"
+        ))
+    extensions = [
+        ("21a", "Net loss and conditional expectation",
+         r"L_h=\sum_{i=1}^{N}w_iX_i[1-r_i(h)],\qquad \mathbb{E}[L_h\mid z]=\sum_{i=1}^{N}w_i u_i(z)[1-\bar r_i(h,z)]"),
+        ("21b", "Net loss covariance",
+         r"\operatorname{Var}(L_h\mid z)=\sum_{i=1}^{N}\sum_{j=1}^{N}w_iw_j\operatorname{Cov}(Y_i,Y_j\mid z),\quad Y_i=X_i[1-r_i(h)]"),
+    ]
+    for number, name, formula in extensions:
+        cells.append(nbf.v4.new_markdown_cell(
+            f"## Equation {number}: {name}\n\n$${formula}$$\n\n"
+            "Section 6.1: fixed compartment balances, a fixed observation period, "
+            "no replenishment or repeated counting, and recovery horizon $h$. "
+            "$u_i(z)=\\Pr(X_i=1\\mid z)$ and "
+            "$\\bar r_i(h,z)=\\mathbb{E}[r_i(h)\\mid X_i=1,z]$, set to zero when $u_i=0$. "
+            "No independence between compromise and recovery is assumed. "
+            "Freezing is not recovery until value is restored to the victim. "
+            "The joint-outcome examples are analytical illustrations, not estimated effects. "
+            "Equal balances and no recovery recover Equations (18)–(19) under their probability/correlation assumptions."
+        ))
+        cells.append(nbf.v4.new_code_cell(
+            f"eq{number} = pd.read_csv(ROOT / 'data/output/eq{number}_results.csv')\n"
+            f"eq{number}"
         ))
     cells.append(nbf.v4.new_markdown_cell("## Figures\n\nFigures are generated from the same equation outputs."))
     cells.append(nbf.v4.new_code_cell(
